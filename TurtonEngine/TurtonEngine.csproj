@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Heatexchanger.cs" />
     <Compile Include="Maintest.cs" />
     <Compile Include="Pump.cs" />
     <Compile Include="Fatores.cs" />

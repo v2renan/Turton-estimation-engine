@@ -9,7 +9,7 @@ namespace TurtonEngine
     public abstract class Fatores
     {
 
-        #region Fatores de pressão
+        #region Atributos de pressão
 
         private List<double> Factp = new List<double>(3);
         private double Fp;
@@ -62,7 +62,7 @@ namespace TurtonEngine
                 case "Heat exchanger":
                     switch (type)
                     {
-                        case "Byonet":
+                        case "Bayonet":
                         case "Fixed tube sheet":
                         case "Floating head":
                         case "Kettle reboiler":
@@ -74,7 +74,7 @@ namespace TurtonEngine
                             }
                             else if (pressao < 140 | pressao > 5)
                             {
-                                Factp.Add(-0.03881); Factp.Add(-0.11272); Factp.Add(0.08183);
+                                Factp.Add(0.03881); Factp.Add(-0.11272); Factp.Add(0.08183);
                                 Fp = Math.Pow(10, (Factp[0] + Factp[1] * Math.Log10(pressao) + Factp[2] * Math.Pow(Math.Log10(pressao), 2)));
                             }
 
@@ -266,11 +266,15 @@ namespace TurtonEngine
 
         #endregion
 
+        #region Atributos de custo
+        public List<double> K = new List<double>(3);
+        public List<double> fCusto(string eq, string type)
+        #endregion
+
 
         #region Fatores de custo
 
-        public List<double> K = new List<double>(3);
-        public List<double> fCusto(string eq, string type)
+
         {
             switch (eq)
             {
@@ -290,6 +294,33 @@ namespace TurtonEngine
                     }
 
                     break;
+                case "Heat exchanger":
+                    switch (type)
+                    {
+                        case "Bayonet":
+                            K.Add(4.2768); K.Add(-0.0495); K.Add(0.1431);
+                            break;
+                        case "Fixed tube sheet":
+                            K.Add(4.3247); K.Add(-0.3030); K.Add(0.1634);
+                            break;
+                        case "Floating head":
+                            K.Add(4.8306); K.Add(-0.8509); K.Add(0.3187);
+                            break;
+                        case "Kettle reboiler":
+                            K.Add(4.4646); K.Add(-0.5277); K.Add(0.3955);
+                            break;
+                        case "U-tube":
+                            K.Add(4.1884); K.Add(-0.2503); K.Add(0.1974);
+                            break;
+                        case "Double pipe":
+                            K.Add(3.3444); K.Add(0.2745); K.Add(-0.0472);
+                            break;
+                        case "Multiple pipes":
+                            K.Add(2.7652); K.Add(0.7282); K.Add(0.0783);
+                            break;
+                    }
+                    break;
+
             }
 
 
