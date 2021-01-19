@@ -49,6 +49,8 @@
     <Compile Include="Pump.cs" />
     <Compile Include="Fatores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tray.cs" />
+    <Compile Include="Vessels.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

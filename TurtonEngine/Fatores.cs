@@ -104,6 +104,7 @@ namespace TurtonEngine
                 
 
 
+
             }
         }
 
@@ -245,7 +246,7 @@ namespace TurtonEngine
         {
             return VesFp;
         }
-        public double setfpVessel(double diam, double pressao, string material, double Temperatura, string pos)
+        public double setFpVessel(double diam, double pressao, string material, double Temperatura, string pos)
         {
             calculoEspessura(diam,  pressao,  material,  Temperatura,  pos);  calculoStress( material,  Temperatura);
             if (esp < 0.0063 && pressao > -0.5)
@@ -320,7 +321,34 @@ namespace TurtonEngine
                             break;
                     }
                     break;
+                case "Vessel":
+                    switch (type)
+                    {
+                        case "Horizontal":
+                            K.Add(3.5565); K.Add(0.3776); K.Add(0.0905);
+                            break;
+                        case "Vertical":
+                            K.Add(3.4974); K.Add(0.4485); K.Add(0.1074);
+                            break;
+                    }
+                    break;
 
+                case "Tray":
+                    switch (type)
+                    {
+                        case "Sieve":
+                            K.Add(2.9949); K.Add(0.4465); K.Add(0.3961);
+                            break;
+                        case "Valve":
+                            K.Add(3.3322); K.Add(0.4838); K.Add(0.3434);
+                            break;
+                        case "Deminister":
+                            K.Add(2.2353); K.Add(0.4838); K.Add(0.3434);
+                            break;
+
+                    }
+
+                    break;
             }
 
 
@@ -330,6 +358,62 @@ namespace TurtonEngine
 
         #endregion
 
+
+        #region Fatores para pratos de coluna
+
+        public int nump;
+        public double Fq;
+        public double Fbm;
+        public string mat;
+
+
+        public double getFq()
+        {
+            return Fq;
+        }
+        public double getFm()
+        {
+            return Fbm;
+        }
+        public void setFq(int nump)
+        {
+            if (nump < 20)
+            {
+                var aux = 0.4771 + 0.08516 * Math.Log10(nump) - 0.3473 * (Math.Pow(Math.Log10(nump), 2));
+                Fq = Math.Pow(10, aux);
+            }
+            else
+            {
+                Fq = 1;
+            }
+                
+        }
+        public void setFbm(string mat,string type)
+        {
+            if (type == "Sieve" | type == "Valve")
+            {
+                switch (mat)
+                {
+                    case "Carbon Steel":
+                        Fbm = 1;
+                        break;
+
+                    case "ss 304":
+                        Fbm = 1.8;
+                        break;
+                }
+            }
+            else
+            {
+                
+               Fq = 1.0;
+                       
+                
+            }
+
+
+        }
+        #endregion
     }
 
 }
