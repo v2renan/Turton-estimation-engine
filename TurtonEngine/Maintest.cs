@@ -17,11 +17,11 @@ namespace TurtonEngine
             //Heatexchanger ht = new Heatexchanger("Multiple pipes", 50, 20);
             //double c = ht.custo();
 
-            //Vessels vessels = new Vessels(3, 30, "Vertical", "ss 304", 300, 2000000); // pressão em N/m2 - Temp em Celsius !!!!!
-            //double v = vessels.custo();
+            Vessels vessels = new Vessels(3, 30, "Vertical", "SS", 300, 2000000); // pressão em N/m2 - Temp em Celsius !!!!!
+            double v = vessels.custo();
 
-            Tray tray = new Tray(3, 40, "Sieve", "ss 304");
-            tray.custoprato();
+            //Tray tray = new Tray(3, 40, "Sieve", "ss 304");
+            //tray.custoprato();
         }
     }
 }

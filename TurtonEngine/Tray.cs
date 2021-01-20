@@ -19,7 +19,7 @@ namespace TurtonEngine
             setFbm(mat, type);
             setFq(num);
             Fq = getFq();
-            Fbm = getFm();
+            Fbm = getFbm();
             L = fCusto("Tray", type);
             double area = (Math.PI * Math.Pow(diam, 2) )/ 4;
             return custop = Math.Pow(10, ((L[0] + L[1] * Math.Log10(area) + L[2] * Math.Pow(Math.Log10(area), 2)))) * num * Fq * Fbm;

@@ -29,10 +29,12 @@ namespace TurtonEngine
             }
                        
             setFpVessel(diam,pres,mat,temp,pos);
+            setFm("Vessel", pos, mat);
+            double Fmat = getFm();
             L = fCusto("Vessel", pos);
             double Fp = getvesselFp();
             double Vol = (Math.PI*Math.Pow(diam,2)*comprimento)/ 4;
-            custoVaso = Math.Pow(10, ((L[0] + L[1] * Math.Log10(Vol) + L[2] * Math.Pow(Math.Log10(Vol), 2)))) * (B[0] + B[1] * Fp);
+            custoVaso = Math.Pow(10, ((L[0] + L[1] * Math.Log10(Vol) + L[2] * Math.Pow(Math.Log10(Vol), 2)))) * (B[0] + B[1] * Fp*Fmat);
             return custoVaso;
         }
 

@@ -371,7 +371,7 @@ namespace TurtonEngine
         {
             return Fq;
         }
-        public double getFm()
+        public double getFbm()
         {
             return Fbm;
         }
@@ -414,6 +414,134 @@ namespace TurtonEngine
 
         }
         #endregion
+
+        #region Atributos de materiais
+        public double Fm;
+        #endregion
+
+        #region Fatores de custo
+        public double getFm()
+        {
+
+            return Fm;
+        }
+        public void setFm(string eq, string type, string material)
+        
+        {
+            switch (eq)
+            {
+                case "Pump":
+
+                    switch (type)
+                    {
+                        case "Reciprocating":
+                            if(material == "Cast iron")
+                            {
+                                Fm = 1;
+                            }
+                            else if (material == "Carbon steel")
+                            {
+                                Fm = 1.4;
+                            }
+                            else
+                            {
+                                Fm = 2.4;
+                            }
+                            break;
+                        case "Positive displacement":
+                            if (material == "Cast iron")
+                            {
+                                Fm = 1;
+                            }
+                            else if (material == "Carbon steel")
+                            {
+                                Fm = 1.4;
+                            }
+                            else
+                            {
+                                Fm = 2.7;
+                            }
+                            break;
+                        case "Centrifugal":
+                            if (material == "Cast iron")
+                            {
+                                Fm = 1;
+                            }
+                            else if (material == "Carbon steel")
+                            {
+                                Fm = 1.55;
+                            }
+                            else
+                            {
+                                Fm = 2.28;
+                            }
+                            break;
+                    }
+
+                    break;
+                case "Heat exchanger":
+                    switch (type)
+                    {
+                        case "Bayonet":                                         
+                        case "Kettle reboiler":                          
+                        case "U-tube":
+                            if (material == "Cu-shell/Cu-tube")
+                            {
+                                Fm = 1.65;
+                            }
+                            else if (material == "CS-shell/SS-tube")
+                            {
+                                Fm = 1.8;
+                            }
+                            else
+                            {
+                                Fm = 2.7;
+                            }
+                          
+                            break;
+                        case "Fixed tube sheet":
+                        case "Floating head":
+                        case "Double pipe":
+                        case "Multiple pipes":
+                            if (material == "CS-shell/CS-tube")
+                            {
+                                Fm = 1;
+                            }
+                            else
+                            {
+                                Fm = 1.4;
+                            }
+                            break;
+                    }
+                    break;
+                case "Vessel":
+                    switch (type)
+                    {
+                        case "Horizontal":
+                        case "Vertical":
+                            if (material == "Carbon steel")
+                            {
+                                Fm = 1;
+
+                            }
+                            else
+                            {
+                                Fm = 3.15;
+                            }
+                            break;
+                    }
+                    break;
+                                    
+            }
+
+
+            
+        }
+
+
+        #endregion
+
+
     }
 
 }
