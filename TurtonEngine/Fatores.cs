@@ -191,7 +191,7 @@ namespace TurtonEngine
                 case "Carbon steel":
                     dens = 7850; // kg/m³
                     break;
-                case "ss 304":
+                case "SS 304":
                     dens = 8000; // kg/m³
                     break;
             }
@@ -201,7 +201,8 @@ namespace TurtonEngine
         #region Cálculo da espessura
         private double calculoEspessura(double diam, double pressao,string material, double Temperatura,string pos)
         {
-            calculoStress(material,Temperatura);
+            
+                calculoStress(material, Temperatura);
             if (pos == "Vertical")
             {
                 double esp1 = (pressao * diam) / ((2 * stress * 1) - (1.2 * pressao)); // Equação 14.13 Towler
@@ -229,17 +230,21 @@ namespace TurtonEngine
 
                 if (esp1 > esp2)
                 {
-                   return esp = esp1;
+                    return esp = esp1;
                 }
                 else
                 {
                     return esp = esp2;
                 }
+
+
             }
-
-
-
         }
+            
+
+
+
+        
         #endregion
 
         public double getvesselFp()
@@ -248,21 +253,38 @@ namespace TurtonEngine
         }
         public double setFpVessel(double diam, double pressao, string material, double Temperatura, string pos)
         {
-            calculoEspessura(diam,  pressao,  material,  Temperatura,  pos);  calculoStress( material,  Temperatura);
-            if (esp < 0.0063 && pressao > -0.5)
+            if (Temperatura == 0)
             {
-                VesFp = 1;
+                if (pressao > -0.5)
+                {
+                    double aux1 = ((pressao + 1) * diam) / ((2 * 944 * 0.9) - 1.2 * (pressao + 1));
+                    VesFp = (aux1 + 0.00315) / 0.0063;
+                }
+                else if (pressao < -0.5)
+                {
+                    VesFp = 1.25;
+                }
+                return VesFp;
             }
-            else if ( esp > 0.0063 && pressao > -0.5)
+            else
             {
-                double aux1 = ((pressao + 1) * diam) / ((2 * stress * 0.9) - 1.2 * (pressao - 1));
-                VesFp = (aux1 + 0.00315) / 0.0063;
+                calculoEspessura(diam, pressao, material, Temperatura, pos); calculoStress(material, Temperatura);
+                if (esp < 0.0063 && pressao > -0.5)
+                {
+                    VesFp = 1;
+                }
+                else if (esp > 0.0063 && pressao > -0.5)
+                {
+                    double aux1 = ((pressao + 1) * diam) / ((2 * stress * 0.9) - 1.2 * (pressao + 1));
+                    VesFp = (aux1 + 0.00315) / 0.0063;
+                }
+                else if (pressao < -0.5)
+                {
+                    VesFp = 1.25;
+                }
+                return VesFp;
             }
-            else if (pressao < -0.5)
-            {
-                VesFp = 1.25;
-            }
-            return VesFp;
+            
         }
 
         #endregion
@@ -394,7 +416,7 @@ namespace TurtonEngine
             {
                 switch (mat)
                 {
-                    case "Carbon Steel":
+                    case "Carbon steel":
                         Fbm = 1;
                         break;
 
@@ -419,7 +441,7 @@ namespace TurtonEngine
         public double Fm;
         #endregion
 
-        #region Fatores de custo
+        #region Fatores de material
         public double getFm()
         {
 
