@@ -43,7 +43,7 @@ namespace TurtonEngine
                         switch (type)
                         {
                             case "Centrifugal":
-                                Factp.Add(-0.3935); Factp.Add(0.3957); Factp.Add(-0.0026);
+                                Factp.Add(-0.3935); Factp.Add(0.3957); Factp.Add(-0.00226);
                                 Fp = Math.Pow(10, (Factp[0] + Factp[1] * Math.Log10(pressao) + Factp[2] * Math.Pow(Math.Log10(pressao), 2)));
                                 break;
                             case "Reciprocating":
